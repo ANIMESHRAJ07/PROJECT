@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Viatra-The Journey,Reimagined</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="{{ url_for('static', filename='images/Viatra_Logo.png') }}" alt="Viatra Logo" width="50" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Book</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Track</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Plans</a>
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary">Login</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-section">
+      <div class="container text-center">
+        <h1>Book your train journey, smarter.</h1>
+        <a href="#" class="btn btn-primary btn-lg">Book Now</a>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <h1 class="text-center">Welcome to Viatra</h1>
+      <p class="text-center">The Journey, Reimagined</p>
+    </div>
+    <div class="container mt-5">
+      <form class="row g-3">
+        <div class="col-md-4">
+          <label for="fromStation" class="form-label">From</label>
+          <input type="text" class="form-control" id="fromStation" placeholder="Enter departure station">
+        </div>
+        <div class="col-md-4">
+          <label for="toStation" class="form-label">To</label>
+          <input type="text" class="form-control" id="toStation" placeholder="Enter destination station">
+        </div>
+        <div class="col-md-4">
+          <label for="travelDate" class="form-label">Date</label>
+          <input type="date" class="form-control" id="travelDate">
+        </div>
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="container mt-5">
+      <div class="row text-center">
+        <div class="col-md-3">
+          <i class="bi bi-calendar-check" style="font-size: 2rem; color: var(--electric-blue);"></i>
+          <h5>Easy Booking</h5>
+          <p>Book your journey in just a few clicks.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="bi bi-map" style="font-size: 2rem; color: var(--electric-blue);"></i>
+          <h5>Live Tracking</h5>
+          <p>Track your train in real-time.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="bi bi-chat-dots" style="font-size: 2rem; color: var(--electric-blue);"></i>
+          <h5>AI Chatbot</h5>
+          <p>Get instant assistance with our AI-powered chatbot.</p>
+        </div>
+        <div class="col-md-3">
+          <i class="bi bi-calculator" style="font-size: 2rem; color: var(--electric-blue);"></i>
+          <h5>Trip Calculator</h5>
+          <p>Estimate your fare and travel time.</p>
+        </div>
+      </div>
+    </div>
+    <div id="chatbot" style="position: fixed; bottom: 20px; right: 20px;">
+      <button class="btn btn-primary rounded-circle" style="width: 60px; height: 60px;" onclick="toggleChatbot()">
+        <i class="bi bi-chat-dots" style="font-size: 1.5rem;"></i>
+      </button>
+      <div id="chatbot-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 300px; height: 400px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div style="background: var(--deep-indigo); color: #fff; padding: 10px; border-radius: 8px 8px 0 0;">
+          <strong>Viatra Chatbot</strong>
+          <button style="float: right; background: none; border: none; color: #fff;" onclick="toggleChatbot()">✖</button>
+        </div>
+        <div id="chatbot-messages" style="padding: 10px; overflow-y: auto; height: 300px;">
+          <p style="color: var(--deep-indigo);">Hello! How can I assist you today?</p>
+        </div>
+        <div style="padding: 10px; border-top: 1px solid #ccc;">
+          <input type="text" id="chatbot-input" placeholder="Type a message..." style="width: 80%; padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
+          <button onclick="sendMessage()" style="width: 18%; padding: 5px; background: var(--electric-blue); color: #fff; border: none; border-radius: 4px;">Send</button>
+        </div>
+      </div>
+    </div>
+    <footer class="bg-dark text-white text-center py-3">
+      <p>&copy; 2025 Viatra. All rights reserved.</p>
+      <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script>
+      function toggleChatbot() {
+        const chatbotWindow = document.getElementById('chatbot-window');
+        chatbotWindow.style.display = chatbotWindow.style.display === 'none' ? 'block' : 'none';
+      }
+
+      function sendMessage() {
+        const input = document.getElementById('chatbot-input');
+        const messages = document.getElementById('chatbot-messages');
+        const userMessage = input.value;
+
+        if (userMessage.trim() !== '') {
+          // Display user message
+          const userMessageElement = document.createElement('p');
+          userMessageElement.style.color = '#FF5722';
+          userMessageElement.textContent = userMessage;
+          messages.appendChild(userMessageElement);
+
+          // Clear input
+          input.value = '';
+
+          // Call chatbot API
+          fetch('/chatbot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMessage })
+          })
+            .then(response => response.json())
+            .then(data => {
+              // Display bot response
+              const botMessageElement = document.createElement('p');
+              botMessageElement.style.color = 'var(--deep-indigo)';
+              botMessageElement.textContent = data.response;
+              messages.appendChild(botMessageElement);
+
+              // Scroll to the bottom
+              messages.scrollTop = messages.scrollHeight;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        }
+      }
+    </script>
+  </body>
+</html>

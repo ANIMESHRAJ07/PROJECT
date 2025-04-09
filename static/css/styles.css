@@ -1,0 +1,157 @@
+/* Primary Colors */
+:root {
+  --deep-indigo: #1A237E;
+  --electric-blue: #00BCD4;
+  --sunset-orange: #FF5722;
+  --warm-yellow: #FFC107;
+  --soft-gray: #F5F5F5;
+  --mint-green: #4DB6AC;
+  --purple-tint: #7E57C2;
+}
+
+/* General Styles */
+body {
+  background-color: #f5f5f5; /* Light gray background */
+  color: #1A237E; /* Deep indigo text */
+  font-family: 'Arial', sans-serif;
+}
+
+h1 {
+  color: #283593; /* Slightly lighter indigo */
+  font-weight: bold;
+}
+
+p {
+  color: #4DB6AC; /* Mint green for a fresh look */
+}
+
+/* Navbar */
+.navbar {
+  background: transparent !important; /* Make the navbar transparent */
+  position: absolute; /* Position it over the hero section */
+  top: 0;
+  width: 100%;
+  z-index: 10; /* Ensure it stays above the hero section */
+}
+
+.navbar-brand, .nav-link {
+  color: #F5F5F5 !important; /* Light gray text */
+}
+
+.navbar .nav-link {
+  color: #fff !important; /* White text for better visibility */
+}
+
+.nav-link:hover {
+  color: #FF5722 !important; /* Sunset orange on hover */
+}
+
+.navbar .btn {
+  background-color: #FF5722;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.navbar .btn:hover {
+  background-color: #E64A19;
+}
+
+/* Buttons */
+.btn-outline-success {
+  color: #FF5722; /* Sunset orange */
+  border-color: #FF5722;
+}
+
+.btn-outline-success:hover {
+  background-color: #FF5722;
+  color: #fff;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  background: url("../images/Background.png") no-repeat center center; /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire section */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: center;
+  background-attachment: fixed;
+  justify-content: center;
+  color: #f0e9e9;
+  text-align: center;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3702); /* Reduce the darkness (opacity 0.4) */
+  z-index: 1;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2; /* Ensure text is above the overlay */
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 8px; /* Optional: Add rounded corners */
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero-section a {
+  font-size: 1.2rem;
+  padding: 10px 30px;
+  background-color: #FF5722; /* Sunset orange for the button */
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.hero-section a:hover {
+  background-color: #E64A19; /* Darker orange on hover */
+}
+
+/* Footer */
+footer {
+  background-color: #1A237E; /* Deep indigo */
+  color:#F5F5F5;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Background and Text */
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Chatbot Styles */
+#chatbot {
+  z-index: 1000;
+}
+
+#chatbot-window {
+  z-index: 1001;
+}
+
+#chatbot button {
+  background-color: #fff;
+  color: #FF5722;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#chatbot button:hover {
+  background-color: #FF5722;
+  color: #fff;
+}
