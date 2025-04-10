@@ -1,18 +1,43 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify, render_template
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
-app = Flask(__name__, static_folder='static')
+# Load environment variables
+load_dotenv()
+app = Flask(__name__)
+
+# Configure API key
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+# Use a valid Gemini model
+model = genai.GenerativeModel("models/gemini-1.5-pro-latest")
+
+# Instruction to restrict model's scope
+INSTRUCTION = (
+    "You are a helpful AI assistant who answers only questions related to trains and trains in India. "
+    "reply to the greeting message"
+    "If the user asks anything unrelated to trains or railway topics, reply with: "
+    "'Sorry, I can only answer questions related to trains in India.'"
+)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
-    #return 'Hello, Flask!'
+    return render_template("index.html")
 
 @app.route('/chatbot', methods=['POST'])
 def chatbot():
-    user_message = request.json.get('message')
-    # TODO: Replace with AI chatbot logic
-    response = f"You said: {user_message}. How can I assist further?"
-    return jsonify({'response': response})
+    data = request.get_json()
+    user_input = data.get("message", "")
 
-if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    try:
+        # Combine instruction with user message
+        full_prompt = f"{INSTRUCTION}\nUser: {user_input}\nAssistant:"
+        response = model.generate_content(full_prompt)
+        return jsonify({"response": response.text})
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"response": "Sorry, I couldn't process that. Please try again later."})
+
+if __name__ == "__main__":
+    app.run(debug=True)
